@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.mybatis.mapper.MemberMapper">
+
+    <select id="loginCheck" resultType="String">
+        select USER_PWD
+        from member
+        where USER_ID = #{loginId}
+    </select>
+
+    <select id="isSameCheckLoginId" resultType="int">
+        select count(*)
+        from member
+        where USER_ID = #{loginId}
+    </select>
+
+    <insert id="memberRegister">
+        insert into member (USER_ID, USER_PWD, USER_NAME, nickname)
+        values (#{loginId}, #{password}, #{name}, #{nickname})
+    </insert>
+
+    <select id="passwordFind" resultType="String">
+        select USER_PWD
+        from member
+        where USER_ID = #{loginId} and USER_NAME = #{name}
+    </select>
+
+    <select id="findOneMember" resultType="Member">
+        select *
+        from member
+        where USER_ID = #{loginId}
+    </select>
+
+    <update id="memberUpdate">
+        update member
+        set USER_ID = #{loginId}, USER_PWD = #{password}, USER_NAME = #{name}, nickName = #{nickname}
+        where USER_ID = #{loginId}
+    </update>
+
+    <select id="findMemberByLoginId" resultType="Member">
+        select USER_ID as loginId, USER_NAME as name, nickname
+        from member
+        where USER_ID = #{loginId}
+    </select>
+</mapper>

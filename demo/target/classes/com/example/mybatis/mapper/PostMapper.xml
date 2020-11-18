@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mybatis.mapper.PostMapper">
+    <select id="postAllCount" resultType="int">
+        select count(BWRITER)
+        from  board;
+    </select>
+
+    <select id="postFindAll" resultType="Post">
+        select p.BID as PostId,p.BTITLE,p.BWRITER,p.BCONTENT,p.BCOUNT,p.CREATE_DATE,
+        RENAME_FILENAME as renameFileName ,ORIGINAL_FILENAME as originalFileName , m.nickname
+        from  board p join member m
+        on p.BWRITER = m.USER_ID
+        where p.STATUS = 'y'
+        order by p.BID desc
+        limit #{page}, #{pageSize};
+    </select>
+
+    <select id="findByPostId" resultType="Post">
+        select p.BID as PostId,p.BTITLE AS title,p.BWRITER as name,p.BCONTENT as content,p.BCOUNT as COUNT,p.CREATE_DATE, 
+        RENAME_FILENAME as renameFileName ,ORIGINAL_FILENAME as originalFileName, m.nickname
+        from  board p join member m
+        on p.BWRITER = m.USER_ID
+        where p.BID = ${postId}
+    </select>
+
+    <update id="postUpdate">
+        update board
+        set BTITLE = #{title}, BCONTENT = #{content}, BCOUNT = #{count}, CREATE_DATE = #{createDateTime}
+        ,RENAME_FILENAME = #{renameFileName}, ORIGINAL_FILENAME = #{originalFileName}
+        where BID = ${postId}
+    </update>
+
+    <select id="postFindByTitle" resultType="Post">
+        select p.BID as PostId,p.BTITLE AS title,p.BWRITER as name,p.BCONTENT as content,p.BCOUNT as COUNT,p.CREATE_DATE, 
+        RENAME_FILENAME as renameFileName ,ORIGINAL_FILENAME as originalFileName, m.nickname
+        from board p join member m
+        on p.BWRITER = m.USER_ID
+        where BTITLE like concat('%', #{search}, '%')
+        limit #{currentPage}, #{pageSize}
+    </select>
+
+    <select id="postFindByNickName" resultType="Post">
+        select p.BID as PostId,p.BTITLE AS title,p.BWRITER as name,p.BCONTENT as content,p.BCOUNT as COUNT,p.CREATE_DATE, 
+        RENAME_FILENAME as renameFileName ,ORIGINAL_FILENAME as originalFileName, m.nickname
+        from board p join member m
+        on p.BWRITER = m.USER_ID
+        where m.nickname like concat('%', #{search}, '%')
+        limit #{currentPage}, #{pageSize}
+    </select>
+
+    <insert id="insertPost">
+        insert into board(BWRITER, BTITLE, BCONTENT, BCOUNT, CREATE_DATE,RENAME_FILENAME, ORIGINAL_FILENAME )
+        values (#{memberId}, #{title}, #{content}, #{count}, now(), #{renameFileName}, #{originalFileName})
+    </insert>
+
+    <update id="deletePost">
+        update board
+        set STATUS = 'n'
+        where BID = #{postId}
+    </update>
+</mapper>
