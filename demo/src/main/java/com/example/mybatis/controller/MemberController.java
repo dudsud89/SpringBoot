@@ -15,6 +15,7 @@ import com.example.mybatis.mapper.MemberMapper;
 
 @EnableRedisHttpSession
 @Controller
+
 public class MemberController {
 
     @Autowired MemberMapper memberMapper;

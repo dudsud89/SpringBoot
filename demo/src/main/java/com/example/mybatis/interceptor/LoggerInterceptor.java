@@ -15,11 +15,11 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+			
 		HttpSession session = request.getSession();
         // login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
         Object obj = session.getAttribute("userId");
-         
+        logger.info((String) obj); 
         if ( obj ==null ){
             // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
             response.sendRedirect("/login");
@@ -31,8 +31,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		logger.info("==================== END ======================");
-		logger.info("===============================================");
+
 	}
 
 }

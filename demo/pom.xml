@@ -111,6 +111,25 @@
 			<artifactId>aspectjweaver</artifactId> 
 			<version>1.8.6</version> 
 		</dependency>
+		<dependency>
+		    <groupId>org.projectlombok</groupId>		
+		    <artifactId>lombok</artifactId>		
+		    <version>1.16.20</version>		
+		    <scope>provided</scope>		
+		</dependency>
+		<dependency>
+	      <groupId>it.ozimov</groupId>
+	      <artifactId>embedded-redis</artifactId>
+	      <version>0.7.2</version>
+	  </dependency>
+	  <dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	  </dependency>
+
+
+
+
 
 	
 
