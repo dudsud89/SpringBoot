@@ -71,6 +71,11 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.20.RELEASE</version>
+        </dependency>
 		
 		
 		
@@ -117,6 +122,7 @@
 		    <version>1.16.20</version>		
 		    <scope>provided</scope>		
 		</dependency>
+		
 		<dependency>
 	      <groupId>it.ozimov</groupId>
 	      <artifactId>embedded-redis</artifactId>
@@ -126,6 +132,17 @@
 	    <groupId>redis.clients</groupId>
 	    <artifactId>jedis</artifactId>
 	  </dependency>
+	  <dependency>
+	    <groupId>org.springframework.batch</groupId>
+	    <artifactId>spring-batch-core</artifactId>
+	    <version>4.2.0.RELEASE</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.batch</groupId>
+	    <artifactId>spring-batch-test</artifactId>
+	    <version>4.2.0.RELEASE</version>
+	    <scope>test</scope>
+	</dependency>
 
 
 
